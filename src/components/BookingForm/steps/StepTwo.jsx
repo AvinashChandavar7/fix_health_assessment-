@@ -1,9 +1,13 @@
-
 import { useFormContext } from 'react-hook-form';
 
 const StepTwo = () => {
-
   const { register, formState: { errors } } = useFormContext();
+
+  // Define a list of cities
+  const cities = [
+    "Mumbai", "Delhi", "Bangalore", "Hyderabad", "Chennai",
+    "Kolkata", "Jaipur", "Ahmedabad", "Pune", "Lucknow",
+  ];
 
   return (
     <div className='w-full flex flex-col items-center justify-center text-white'>
@@ -13,10 +17,14 @@ const StepTwo = () => {
         <input {...register("age", { required: 'Age is required' })} className='bg-transparent border px-4 py-2 rounded-md' />
         {errors.age && <p>{errors.age.message}</p>}
       </div>
-      {/* City */}
+      {/* City dropdown */}
       <div className='flex flex-col my-3'>
         <label>City<span className='text-red-500'>*</span></label>
-        <input {...register("city")} className='bg-transparent border px-4 py-2 rounded-md' />
+        <select {...register("city")} className='bg-transparent border px-4 py-2 rounded-md '>
+          {cities.map((city, index) => (
+            <option key={index} value={city} className='bg-transparent text-black'>{city}</option>
+          ))}
+        </select>
       </div>
       {/* Company */}
       <div className='flex flex-col my-3'>
@@ -27,4 +35,4 @@ const StepTwo = () => {
   )
 }
 
-export default StepTwo
+export default StepTwo;
